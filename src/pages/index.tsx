@@ -1,10 +1,11 @@
-import { NextPage } from "next";
+import { trpc } from "src/utils/trpc";
 
-interface Props {
-  //
-}
+const Index = () => {
+  const { data, isLoading } = trpc.useQuery(["hello", { text: "from tRPC" }]);
 
-const Index: NextPage<Props> = () => {
+  if (isLoading) return <div>loading...</div>;
+  if (data) return <div>{data.greeting}</div>;
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
       <div className="text-2xl sm:text-3xl font-bold sm:font-black">
