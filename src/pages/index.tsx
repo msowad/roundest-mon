@@ -4,7 +4,7 @@ import { getIndexForVote } from "src/utils/random_pokemon";
 import { trpc } from "src/utils/trpc";
 
 const Index = () => {
-  const [ids] = useState(() => getIndexForVote());
+  const [ids, updateIds] = useState(getIndexForVote());
   const [first, second] = ids;
 
   const { data: firstPoke, isLoading: isFirstPokeLoading } = trpc.useQuery([
@@ -15,6 +15,10 @@ const Index = () => {
     "get-pokemon-by-id",
     { id: second },
   ]);
+
+  const handleVote = (id: number) => {
+    updateIds(getIndexForVote());
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">

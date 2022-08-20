@@ -1,22 +1,17 @@
-import { Pokemon } from "pokenode-ts";
 import NextImage from "next/image";
 
 interface Props {
-  pokemon?: Pokemon;
+  pokemon?: { name: string; sprite: string | null };
 }
 
 const Pokemon: React.FC<Props> = ({ pokemon }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      {pokemon?.sprites.front_default ? (
+      {pokemon?.sprite && pokemon?.name ? (
         <>
-          <NextImage
-            src={pokemon.sprites.front_default}
-            width={128}
-            height={128}
-          />
+          <NextImage src={pokemon.sprite} width={128} height={128} />
           <h1 className="text-xl font-semibold capitalize mt-[-.5rem]">
-            {pokemon?.name}
+            {pokemon.name}
           </h1>
         </>
       ) : (
