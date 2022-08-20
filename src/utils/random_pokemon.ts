@@ -9,6 +9,5 @@ export const getRandomPokemon: (except?: number) => number = (except) => {
 export const getIndexForVote = () => {
   const firstIndex = getRandomPokemon();
   const secondIndex = getRandomPokemon(firstIndex);
-  console.log("called");
   return [firstIndex, secondIndex];
 };
