@@ -25,6 +25,8 @@ model Vote {
 model Pokemon {
   id Int @id @default(autoincrement())
 
+  name         String
+  spriteUrl    String
   votedFor     Vote[] @relation("votedFor")
   votedAgainst Vote[] @relation("votedAgainst")
 }
