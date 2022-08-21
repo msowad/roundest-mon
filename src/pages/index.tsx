@@ -18,7 +18,14 @@ const Index = () => {
     isError: isSecondPokeError,
   } = trpc.useQuery(["get-pokemon-by-id", { id: second }]);
 
-  const handleVote = (id: number) => {
+  const voteMutation = trpc.useMutation(["cast-vote"]);
+
+  const handleVote = async (id: number) => {
+    voteMutation.mutate({
+      votedFor: id,
+      votedAgainst: id === first ? second : first,
+    });
+
     updateIds(getIndexForVote());
   };
 
