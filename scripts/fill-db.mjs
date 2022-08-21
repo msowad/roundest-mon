@@ -10,8 +10,11 @@ const storePokemon = async () => {
 
   const allPokemons = await pokemonApi.pokemon.listPokemons(0, 493);
   const formattedPokemons = allPokemons.results.map((p, index) => ({
+    id: index + 1,
     name: p.name,
-    spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`,
+    spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+      index + 1
+    }.png`,
   }));
 
   await prisma.pokemon.deleteMany();
