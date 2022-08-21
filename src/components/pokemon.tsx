@@ -19,9 +19,9 @@ const Pokemon: React.FC<Props> = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      {!isError && !isLoading && pokemon?.sprite && pokemon?.name && (
+      {!isError && !isLoading && pokemon?.spriteUrl && pokemon?.name && (
         <>
-          <NextImage src={pokemon.sprite} width={128} height={128} />
+          <NextImage src={pokemon.spriteUrl} width={128} height={128} />
           <h1 className="text-xl font-semibold capitalize mt-[-.5rem]">
             {pokemon.name}
           </h1>
