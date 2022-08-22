@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import { useState } from "react";
 import Pokemon from "src/components/pokemon";
 import { getIndexForVote } from "src/utils/random_pokemon";
@@ -55,6 +56,14 @@ const Index = () => {
           isError={isSecondPokeError}
           onRetry={handleRetry}
         />
+      </div>
+      <div className="p-2" />
+      <div className="">
+        <NextLink href="/results">
+          <a className="underline hover:text-white text-gray-400">
+            View Results
+          </a>
+        </NextLink>
       </div>
     </div>
   );
