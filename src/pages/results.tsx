@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import React from "react";
@@ -104,11 +104,12 @@ const TableHeader = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const pokemons = await getPokemonsOrderByVote();
 
   return {
     props: { pokemons },
+    revalidate: 60,
   };
 };
 
