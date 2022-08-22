@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import React from "react";
 import {
-  getPokemonsOrderByVote,
+  getPokemonsOrderByVotePercent,
   GetPokemonsOrderByVoteType,
 } from "src/utils/get-pokemon";
 
@@ -49,7 +49,7 @@ const PokeTable: React.FC<{ pokemons: GetPokemonsOrderByVoteType }> = ({
                 scope="row"
                 className="px-6 capitalize font-medium whitespace-nowrap"
               >
-                {generateVoteCountPercent(p)}%
+                {generateVoteCountPercent(p).toFixed(2)}%
               </th>
             </tr>
           ))}
@@ -105,7 +105,7 @@ const TableHeader = () => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pokemons = await getPokemonsOrderByVote();
+  const pokemons = await getPokemonsOrderByVotePercent();
 
   return {
     props: { pokemons },

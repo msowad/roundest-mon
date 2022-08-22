@@ -2,12 +2,11 @@ import { prisma } from "src/server/utils/prisma";
 import { AsyncReturnType } from "src/utils/ts-bs";
 
 export type GetPokemonsOrderByVoteType = AsyncReturnType<
-  typeof getPokemonsOrderByVote
+  typeof getPokemonsOrderByVotePercent
 >;
 
-export const getPokemonsOrderByVote = async () => {
+export const getPokemonsOrderByVotePercent = async () => {
   const pokemons = await prisma.pokemon.findMany({
-    orderBy: { votedFor: { _count: "desc" } },
     select: {
       id: true,
       name: true,
@@ -20,5 +19,17 @@ export const getPokemonsOrderByVote = async () => {
       },
     },
   });
-  return pokemons;
+  const sortedPokemons = pokemons.sort(
+    (a, b) => generateVoteCountPercent(b) - generateVoteCountPercent(a)
+  );
+  return sortedPokemons;
+};
+
+export const generateVoteCountPercent = (
+  pokemon: GetPokemonsOrderByVoteType[number]
+) => {
+  const { votedFor, votedAgainst } = pokemon._count;
+  const totalVote = votedFor + votedAgainst;
+  if (totalVote == 0) return 0;
+  return (votedFor / totalVote) * 100;
 };
